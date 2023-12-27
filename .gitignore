@@ -1,0 +1,5 @@
+lineplotprep/*
+.ipynb_checkpoints/*
+__p*
+*.npy
+*.png
