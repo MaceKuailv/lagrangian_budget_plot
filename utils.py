@@ -69,3 +69,14 @@ def open_domain_all():
         subs.append(sub)
     ds = xr.concat(subs,dim = 'space')
     return ds
+
+def open_case(which):
+    if which == 'fresh':
+        particle_path = '/sciserver/filedb04-01/ocean/wenrui_temp/particle_file/freshM/'
+    elif which == 'salty':
+        particle_path = '/sciserver/filedb08-01/ocean/wenrui_temp/particle_file/saltyM/'
+    table_path = particle_path+'table/'
+    map_path = particle_path+'maps/'
+    maps = xr.open_zarr(map_path)
+    table= xr.open_zarr(table_path)
+    return maps, table
