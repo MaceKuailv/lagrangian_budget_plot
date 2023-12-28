@@ -1,0 +1,71 @@
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+def open_domain4():
+    slices = []
+    for i in range(5):
+        slices.append(str(slice(i*730,(i+1)*730)))
+    subs = []
+    offsets = [i*730 for i in range(5)]
+    for slid in range(5): 
+        strslice = slices[slid]
+        sub_name = ['table'+str(i)+strslice for i in range(0,161)]
+        for name in sub_name:
+            if name not in lst:
+                print(name)
+        datasets = [xr.open_zarr(path+name) for name in sub_name]
+        
+        sub = xr.concat(datasets,dim = 'time')
+    
+        sub['space']=sub.space+offsets[slid]
+        subs.append(sub)
+    ds = xr.concat(subs,dim = 'space')
+    return ds
+
+def open_domain_all():
+    path2 = '/sciserver/filedb10-02/ocean/wenrui_temp/table_domain_all/'
+    # print(len(os.listdir(path2))/161)
+    
+    path1 = '/sciserver/filedb10-01/ocean/wenrui_temp/table_dec11/'
+    
+    # import os
+    # print(len(os.listdir(path1)))
+    
+    # print(len([i for i in os.listdir(path1) if 'slice(0' in i]))
+    
+    # print(len([i for i in os.listdir(path1) if 'slice(7' in i]))
+    
+    lst = os.listdir(path1)
+    proc = np.arange(0,161)
+    slices1 = [slice(0,730), slice(730,1095)]
+    for s in slices1:
+        for p in proc:
+            name = 'table'+str(p)+str(s)
+            # if name not in lst:
+            #     print(p, end = ' ')
+        # print()
+    slices2 = []
+    for i in range(3,10):
+        slices2.append(str(slice(i*365,(i+1)*365)))
+    slices2
+    
+    subs = []
+    offsets = [(i+int(i>0.5))*365 for i in range(9)]
+    for slid in range(2):
+        strslice = str(slices1[slid])
+        sub_name = ['table'+str(i)+strslice for i in range(0,161)]
+        datasets = [xr.open_zarr(path1+name) for name in sub_name]
+        sub = xr.concat(datasets,dim = 'time')
+        sub['space']=sub.space+offsets[slid]
+        subs.append(sub)
+    for slid in range(3,10): 
+        strslice = str(slices2[slid-3])
+        sub_name = ['table'+str(i)+strslice for i in range(0,161)]
+        datasets = [xr.open_zarr(path2+name) for name in sub_name]
+        sub = xr.concat(datasets,dim = 'time')
+        sub['space']=sub.space+offsets[slid-1]
+        subs.append(sub)
+    ds = xr.concat(subs,dim = 'space')
+    return ds
