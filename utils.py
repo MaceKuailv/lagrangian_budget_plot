@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 def open_domain4():
+    path = '/sciserver/filedb10-01/ocean/wenrui_temp/table_domain5/'
     slices = []
     for i in range(5):
         slices.append(str(slice(i*730,(i+1)*730)))
@@ -12,9 +13,6 @@ def open_domain4():
     for slid in range(5): 
         strslice = slices[slid]
         sub_name = ['table'+str(i)+strslice for i in range(0,161)]
-        for name in sub_name:
-            if name not in lst:
-                print(name)
         datasets = [xr.open_zarr(path+name) for name in sub_name]
         
         sub = xr.concat(datasets,dim = 'time')

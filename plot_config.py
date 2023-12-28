@@ -25,10 +25,13 @@ mean_time_cmap = plt.get_cmap('YlGn_r')
 
 a_palette5 = ["#df2935","#86ba90","#f5f3bb","#dfa06e","#412722"]
 region_names =['gulf','labr','gdbk','nace','egrl']
+region_longnames = ['Gulf Stream','Labrador Current','Grand Bank','NAC Extension','East Greenland Current']
+region_longnames = dict(zip(region_names, region_longnames))
 region_colors = dict(zip(region_names,a_palette5))
 
-rhs_list = ['e_ua','E','dif_h','dif_v','A','I','F']
-term_colors = ['#66c2a5','#fc8d62','#8da0cb','#e78ac3','#a6d854','#ffd92f','#e5c494']
+# rhs_list = ['e_ua','E','dif_h','dif_v','A','I','F']
+rhs_list = ['A','F','dif_v','dif_h','E','e_ua','I']
+term_colors = ['#fc8d62','#66c2a5','#8da0cb','#e78ac3','#a6d854','#ffd92f','#e5c494']
 color_dic = dict(zip(rhs_list,term_colors))
 
 error_color = 'r'
