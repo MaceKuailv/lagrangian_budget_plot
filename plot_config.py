@@ -6,6 +6,7 @@ import cartopy.feature as cfeature
 import matplotlib.path as mpath
 
 dpi = 100
+rerun = False
 
 projection = ccrs.LambertConformal(central_longitude=-45, central_latitude=58.0)
 extent = (-95, 13, 12, 85)
