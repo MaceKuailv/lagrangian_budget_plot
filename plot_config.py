@@ -10,6 +10,7 @@ dpi = 100
 projection = ccrs.LambertConformal(central_longitude=-45, central_latitude=58.0)
 extent = (-95, 13, 12, 85)
 
+balance = cmocean.cm.balance
 depth_cmap = "Greys_r"
 depth_norm = mpl.colors.Normalize(vmin=0, vmax=5000)
 
@@ -22,6 +23,9 @@ salty_theme_color = 'maroon'
 salty_idate = 5479
 
 mean_time_cmap = plt.get_cmap('YlGn_r')
+
+s_cmap = plt.get_cmap('PuOr_r')
+term_cmap = balance
 
 a_palette5 = ["#df2935","#86ba90","#f5f3bb","#dfa06e","#412722"]
 region_names =['gulf','labr','gdbk','nace','egrl']
@@ -36,13 +40,21 @@ color_dic = dict(zip(rhs_list,term_colors))
 
 error_color = 'r'
 
-balance = cmocean.cm.balance
-
 term_dic = {
     'A': r"$-u'\cdot \nabla \bar s'$",
     'F': "Evap/Prec",
     'E': r"$(-u'\nabla s'-\overline{u'\nabla s'})$",
     # 'E': r"$\overline{u'\cdot \nabla s'}$",
+    'dif_v': "Vertical Diffusion",
+    'dif_h': "Horizontal diffusion",
+    'e_ua': "Subdaily Advection",
+    'I': "Surface salt flux and salt plume"
+}
+case_term_dic = {
+    'A': r"$-u'\cdot \nabla \bar s'$",
+    'F': "Evap/Prec",
+    # 'E': r"$(-u'\nabla s'-\overline{u'\nabla s'})$",
+    'E': r"$\overline{u'\cdot \nabla s'}$",
     'dif_v': "Vertical Diffusion",
     'dif_h': "Horizontal diffusion",
     'e_ua': "Subdaily Advection",
