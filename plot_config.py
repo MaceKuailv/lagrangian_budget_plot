@@ -44,7 +44,7 @@ error_color = 'r'
 term_dic = {
     'A': r"$-u'\cdot \nabla \bar s'$",
     'F': "Evap/Prec",
-    'E': r"$(-u'\nabla s'-\overline{u'\nabla s'})$",
+    'E': r"$-(u'\nabla s'-\overline{u'\nabla s'})$",
     # 'E': r"$\overline{u'\cdot \nabla s'}$",
     'dif_v': "Vertical Diffusion",
     'dif_h': "Horizontal diffusion",
