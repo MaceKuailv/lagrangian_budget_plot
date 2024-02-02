@@ -7,13 +7,14 @@ import matplotlib.path as mpath
 
 dpi = 100
 rerun = False
+regen_talk = True
 
 projection = ccrs.LambertConformal(central_longitude=-45, central_latitude=58.0)
-extent = (-95, 13, 12, 85)
+extent = (-95, 13, 12, 90)
 
 balance = cmocean.cm.balance
 depth_cmap = "Greys_r"
-depth_norm = mpl.colors.Normalize(vmin=0, vmax=5000)
+depth_norm = mpl.colors.Normalize(vmin=-5000, vmax=5000)
 
 fresh_time_cmap = plt.get_cmap('BuPu_r')
 fresh_theme_color = 'teal'
@@ -28,7 +29,9 @@ mean_time_cmap = plt.get_cmap('YlGn_r')
 s_cmap = plt.get_cmap('PuOr_r')
 term_cmap = balance
 
-a_palette5 = ["#df2935","#86ba90","#f5f3bb","#dfa06e","#412722"]
+# a_palette5 = ["#df2935","#86ba90","#f5f3bb","#dfa06e","#412722"]
+# a_palette5 = ["#1b4079","#4d7c8a","#7f9c96","#8fad88","#cbdf90"]
+a_palette5 = ["#003049","#61988e","#f77f00","#7d1538","#8390fa"]
 region_names =['gulf','labr','gdbk','nace','egrl']
 region_longnames = ['Gulf Stream','Labrador Current','Grand Bank','NAC Extension','East Greenland Current']
 region_longnames = dict(zip(region_names, region_longnames))
@@ -42,7 +45,7 @@ color_dic = dict(zip(rhs_list,term_colors))
 error_color = 'r'
 
 term_dic = {
-    'A': r"$-u'\cdot \nabla \bar s'$",
+    'A': r"$-u'\cdot \nabla \bar s$",
     'F': "Evap/Prec",
     'E': r"$-(u'\nabla s'-\overline{u'\nabla s'})$",
     # 'E': r"$\overline{u'\cdot \nabla s'}$",
@@ -52,7 +55,7 @@ term_dic = {
     'I': "Surface salt flux and salt plume"
 }
 case_term_dic = {
-    'A': r"$-u'\cdot \nabla \bar s'$",
+    'A': r"$-u'\cdot \nabla \bar s$",
     'F': "Evap/Prec",
     # 'E': r"$(-u'\nabla s'-\overline{u'\nabla s'})$",
     'E': r"$\overline{u'\cdot \nabla s'}$",
@@ -67,3 +70,8 @@ NUMBER_OF_PARTICLE_domain_all = 1224905
 
 TOTAL_VOLUME_salty,NUMBER_OF_PARTICLE_salty,VOLUME_EACH_salty = (269320135376896.0, 999984, 269324444.5680091)
 TOTAL_VOLUME_fresh,NUMBER_OF_PARTICLE_fresh,VOLUME_EACH_fresh = (131811648733184.0, 1000041, 131806244.67715223)
+
+fill_betweenx_kwarg = dict(
+    color = 'grey',
+    alpha = 0.5
+)

@@ -80,3 +80,31 @@ def open_case(which):
     maps = xr.open_zarr(map_path)
     table= xr.open_zarr(table_path)
     return maps, table
+
+def open_case_month(which,int_arg):
+    if which == 'fresh':
+        those_slices = [427, 458, 486, 517]
+        particle_path = '/sciserver/filedb04-01/ocean/wenrui_temp/particle_file/freshM/'
+    elif which == 'salty':
+        those_slices = [122,153,184,214,245,275,306]
+        particle_path = '/sciserver/filedb08-01/ocean/wenrui_temp/particle_file/saltyM/'
+    the_slice = slice(those_slices[int_arg], those_slices[int_arg+1])
+    table_path = particle_path+str(the_slice)+'table/'
+    map_path = particle_path+str(the_slice)+'maps/'
+    maps = xr.open_zarr(map_path)
+    table= xr.open_zarr(table_path)
+    return maps, table
+
+def open_monthly_mxld():
+    mine = '/export/scratch/wjiang33/'
+    mx = xr.open_zarr(mine+'mxd_monthly.zarr')
+    return mx
+
+
+def poly_from_xyrange(xrange,yrange):
+    poly = []
+    for x in xrange:
+        for y in yrange:
+            poly.append((x,y))
+    poly = [poly[i] for i in [0,1,3,2]]
+    return np.array(poly)
